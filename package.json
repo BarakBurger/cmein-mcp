@@ -1,0 +1,40 @@
+{
+  "name": "cmein-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CMeIn's MCP server: ten tools, six public and four on a customer's own account behind OAuth.",
+  "license": "MIT",
+  "homepage": "https://cmein.com/mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BarakBurger/cmein-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "dating-profile-photos",
+    "ai-photos",
+    "cmein"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch & node --watch dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.31.0",
+    "express": "^5.1.0",
+    "jose": "^6.2.12",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

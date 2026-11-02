@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.cmein/cmein",
+  "title": "CMeIn",
+  "description": "Turns ordinary phone photos of you into photos of you having a life. Advice, credits, 4,500 scenes.",
+  "version": "1.1.1",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.cmein.com/mcp"
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/BarakBurger/cmein-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://cmein.com/mcp"
+}
