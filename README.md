@@ -201,6 +201,11 @@ A `Dockerfile` is included: a two-stage build that runs as a non-root user with 
 - [Blog](https://cmein.com/blog) and [Guides](https://cmein.com/guides): what `photo_advice` searches
 - [YouTube shorts](https://www.youtube.com/@cmein-ai/shorts): what `find_video` finds
 
+### Also from CMeIn
+
+- [cmein-makeup](https://github.com/BarakBurger/cmein-makeup): the on-device makeup try-on engine
+  behind cmein.com/makeup, open source
+
 ### This connector
 
 - [cmein.com/mcp](https://cmein.com/mcp): the same connector explained for people, not developers
