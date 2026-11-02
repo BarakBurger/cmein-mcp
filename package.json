@@ -1,6 +1,6 @@
 {
   "name": "cmein-mcp",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "private": true,
   "description": "CMeIn's MCP server: ten tools, six public and four on a customer's own account behind OAuth.",
   "license": "MIT",

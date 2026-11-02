@@ -1,34 +1,81 @@
+<p align="center">
+  <img src=".github/assets/banner.png" alt="CMeIn MCP server: ask your AI about your dating photos. Server address https://mcp.cmein.com/mcp, works in Claude, ChatGPT, Cursor, VS Code, Codex and Gemini CLI." width="100%">
+</p>
+
+<p align="center">
+  <a href="https://cursor.com/install-mcp?name=cmein&config=eyJ1cmwiOiJodHRwczovL21jcC5jbWVpbi5jb20vbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add CMeIn to Cursor" height="32"></a>
+  <a href="https://insiders.vscode.dev/redirect/mcp/install?name=cmein&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.cmein.com%2Fmcp%22%7D"><img src="https://img.shields.io/badge/VS_Code-Install_CMeIn-0098FF?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Install CMeIn in VS Code" height="32"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/BarakBurger/cmein-mcp/actions/workflows/build.yml"><img src="https://github.com/BarakBurger/cmein-mcp/actions/workflows/build.yml/badge.svg" alt="Build status"></a>
+  <a href="https://github.com/BarakBurger/cmein-mcp/releases"><img src="https://img.shields.io/github/v/release/BarakBurger/cmein-mcp" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
+</p>
+
 # CMeIn MCP server
 
-Connect [CMeIn](https://cmein.com) to Claude, ChatGPT, Cursor, Codex, Grok or Gemini CLI. Ask about
-dating-profile photos and get answers from what CMeIn has actually written, with the source links.
-Connect your account and your assistant can check your credits, see what you have made, and find
-the next scene to shoot.
+Connect [CMeIn](https://cmein.com) to your AI assistant. Ask about dating-profile photos and get
+answers from what CMeIn has actually written, with the source links. Connect your account and your
+assistant can check your credits, see what you have made, and find the next scene to shoot.
 
 CMeIn turns a handful of ordinary phone photos of you into realistic, candid photos of you out in
 the world: at a cafe, on a hike, at a friend's dinner. No studio headshots, no beauty filter.
 
-**Server address:** `https://mcp.cmein.com/mcp` (streamable HTTP)
+## Quick start
 
-More on the product page: [cmein.com/mcp](https://cmein.com/mcp)
+There is nothing to install or run. CMeIn hosts the server; you add one address to your assistant:
 
-Get the app: [App Store](https://apps.apple.com/app/id6777321629) ·
-[Google Play](https://play.google.com/store/apps/details?id=com.cmein.ai) ·
-[web](https://cmein.com)
-
-## Connect it
-
-**Claude Code**, one command:
-
-```bash
-claude mcp add --transport http cmein https://mcp.cmein.com/mcp
+```text
+https://mcp.cmein.com/mcp
 ```
 
-**Everywhere else** (Claude, ChatGPT, Cursor, Codex, Grok, Gemini CLI) the setting is called a
-custom connector, an MCP server or an MCP app, and it asks for a URL. Paste
-`https://mcp.cmein.com/mcp`. In ChatGPT it is under Plugins, Add, Create MCP App.
+| Assistant | How |
+|---|---|
+| **Claude** (web, desktop) | Open Connectors, choose **Add custom connector**, paste the address. Free plans allow one custom connector. |
+| **Claude Code** | `claude mcp add --transport http cmein https://mcp.cmein.com/mcp` |
+| **ChatGPT** | Plugins, **Add**, **Create MCP App**, paste the address |
+| **Cursor** | The **Add to Cursor** button above, or add it to `~/.cursor/mcp.json` (below) |
+| **VS Code** | The **Install in VS Code** button above, or `code --add-mcp '{"name":"cmein","type":"http","url":"https://mcp.cmein.com/mcp"}'` |
+| **Codex, Grok, Gemini CLI** | Add an HTTP MCP server with the address above |
 
-The six public tools work straight away. The four account tools ask you to sign in to CMeIn once.
+Cursor's `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "cmein": { "url": "https://mcp.cmein.com/mcp" }
+  }
+}
+```
+
+Then ask it something:
+
+- *"Are AI dating photos catfishing?"*
+- *"What does CMeIn cost?"*
+- *"Find me a CMeIn scene in a cafe"* (asks you to sign in to CMeIn once)
+
+The six public tools work straight away. The four account tools ask you to sign in to CMeIn once,
+on one approval screen that lists exactly what you are granting.
+
+## See it work
+
+A real exchange in Claude Code, 2 November 2026, with the connector added:
+
+> **You:** Are AI dating photos catfishing?
+>
+> *Claude called `photo_advice` on cmein*
+>
+> **Claude:** No, as long as the photos still look like you. The test from CMeIn's article
+> ([Are AI Dating Photos Catfishing?](https://cmein.com/blog/are-ai-dating-photos-catfishing)) is:
+> **would your date recognise you instantly, with no disappointment?**
+>
+> - **Catfishing:** AI that changes your face or body (younger, slimmer, sharper jaw), or puts you
+>   in activities you don't actually do.
+> - **Not catfishing:** AI that changes only the setting and keeps your real face and build, the
+>   same way a good photographer or good light would.
+
+The answer comes from CMeIn's own article, and the link is there so you can check it.
 
 ## Tools
 
@@ -63,6 +110,9 @@ One approval screen on cmein.com lists exactly what you are granting.
 
 ## Tool reference
 
+<details>
+<summary>Parameters and limits for all ten tools</summary>
+
 Read from the live server's `tools/list`. Read-only tools change nothing; the two that write send a
 message to a person at CMeIn and nothing else.
 
@@ -81,6 +131,8 @@ message to a person at CMeIn and nothing else.
 
 Ask your assistant to list the tools to see the exact schemas it received.
 
+</details>
+
 ## How it works
 
 - **Advice** is BM25 search over CMeIn's own articles, with the title and target keyword weighted.
@@ -92,9 +144,10 @@ Ask your assistant to list the tools to see the exact schemas it received.
   against cmein.com's published signing keys, checking the issuer and that the token was issued for
   this server (RFC 8707). Credits, terms and limits are enforced by cmein.com, not here.
 
-## Run it yourself
+## Self-hosting (optional)
 
-Node 22 or newer.
+You do not need this to use CMeIn; the hosted address above is the normal way. To run your own
+copy, Node 22 or newer:
 
 ```bash
 npm install
@@ -121,19 +174,34 @@ A `Dockerfile` is included: a two-stage build that runs as a non-root user with 
 
 ## Links
 
-- [cmein.com](https://cmein.com): the product
-- [Pricing](https://cmein.com/pricing): the credit packs (`cmein_pricing` reads this page live, so
-  prices are never copied into this repo)
-- [The Wingman](https://cmein.com/wingman): photos, a bio and your messages, worked on with you
-- [cmein.com/mcp](https://cmein.com/mcp): this connector, for people rather than developers
-- [Blog](https://cmein.com/blog): the articles `photo_advice` answers from
-- [Guides](https://cmein.com/guides) and the free [Best Angle](https://cmein.com/best-angle) tool
-- Apps: [App Store](https://apps.apple.com/app/id6777321629),
-  [Google Play](https://play.google.com/store/apps/details?id=com.cmein.ai)
-- [YouTube](https://www.youtube.com/@cmein-ai/shorts), [Instagram](https://www.instagram.com/cmein.app/),
-  [Threads](https://www.threads.com/@cmein.app), [Facebook](https://www.facebook.com/people/CMeIn/61590427634614/)
+### Use CMeIn
 
-Questions or a bug: open an issue here, or ask the connector itself with `contact_us`.
+- [cmein.com](https://cmein.com) on the web, or the app on the
+  [App Store](https://apps.apple.com/app/id6777321629) and
+  [Google Play](https://play.google.com/store/apps/details?id=com.cmein.ai)
+- [Pricing](https://cmein.com/pricing): the credit packs. `cmein_pricing` reads this page live, so
+  no price is copied into this repo.
+- [The Wingman](https://cmein.com/wingman): photos, a bio and your messages, worked on with you
+- [Best Angle](https://cmein.com/best-angle): a free tool that ranks your photos and names the one
+  to lead with
+
+### Where the answers come from
+
+- [Blog](https://cmein.com/blog) and [Guides](https://cmein.com/guides): what `photo_advice` searches
+- [YouTube shorts](https://www.youtube.com/@cmein-ai/shorts): what `find_video` finds
+
+### This connector
+
+- [cmein.com/mcp](https://cmein.com/mcp): the same connector explained for people, not developers
+- A question or a bug: [open an issue](https://github.com/BarakBurger/cmein-mcp/issues), or ask the
+  connector itself with `contact_us`
+
+### Follow CMeIn
+
+[Instagram](https://www.instagram.com/cmein.app/) ·
+[Threads](https://www.threads.com/@cmein.app) ·
+[Facebook](https://www.facebook.com/people/CMeIn/61590427634614/) ·
+[YouTube](https://www.youtube.com/@cmein-ai/shorts)
 
 ## License
 
