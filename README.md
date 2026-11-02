@@ -62,18 +62,29 @@ on one approval screen that lists exactly what you are granting.
 
 A real exchange in Claude Code, 2 November 2026, with the connector added:
 
-> **You:** Are AI dating photos catfishing?
+> **You:** Are AI dating photos with cmein catfishing?
 >
 > *Claude called `photo_advice` on cmein*
 >
-> **Claude:** No, as long as the photos still look like you. The test from CMeIn's article
-> ([Are AI Dating Photos Catfishing?](https://cmein.com/blog/are-ai-dating-photos-catfishing)) is:
-> **would your date recognise you instantly, with no disappointment?**
+> **Claude:** No, not if they're used the way CMeIn is built for. CMeIn works from a handful of your
+> own ordinary phone photos. It changes where you are and what you're doing, and it's designed to
+> keep your real face and build. Its own line is "the real, ordinary you, preserved": no younger
+> look, no slimmer body, no sharper jaw. In the article's words: "The scenery changes; the guy does
+> not."
 >
-> - **Catfishing:** AI that changes your face or body (younger, slimmer, sharper jaw), or puts you
->   in activities you don't actually do.
-> - **Not catfishing:** AI that changes only the setting and keeps your real face and build, the
->   same way a good photographer or good light would.
+> The test from CMeIn's article
+> ([Are AI Dating Photos Catfishing?](https://cmein.com/blog/are-ai-dating-photos-catfishing)) is:
+> **would your date recognise you instantly, with no disappointment?** CMeIn photos are made to pass
+> that test.
+>
+> The tool can't make the photos honest for you, though. Two things are still up to you:
+>
+> - **Pick scenes that are true to your life.** A surf photo when you've never surfed is still a
+>   broken promise, whoever made it.
+> - **Don't post a result that doesn't look like you.** If one comes out looking unlike you, leave
+>   it out.
+>
+> Note: this is CMeIn's own description of its product, not an independent review.
 
 The answer comes from CMeIn's own article, and the link is there so you can check it.
 
