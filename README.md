@@ -12,6 +12,10 @@ the world: at a cafe, on a hike, at a friend's dinner. No studio headshots, no b
 
 More on the product page: [cmein.com/mcp](https://cmein.com/mcp)
 
+Get the app: [App Store](https://apps.apple.com/app/id6777321629) ·
+[Google Play](https://play.google.com/store/apps/details?id=com.cmein.ai) ·
+[web](https://cmein.com)
+
 ## Connect it
 
 **Claude Code**, one command:
@@ -57,6 +61,26 @@ One approval screen on cmein.com lists exactly what you are granting.
   images. Routing your pictures through another company's chat logs buys you nothing.
 - **It cannot spend your credits.** There is no write scope for photos, by design.
 
+## Tool reference
+
+Read from the live server's `tools/list`. Read-only tools change nothing; the two that write send a
+message to a person at CMeIn and nothing else.
+
+| Tool | Parameters | Read-only |
+|---|---|---|
+| `photo_advice` | `question` string, required, up to 500 chars; `limit` 1 to 5, default 3 | yes |
+| `cmein_pricing` | none | yes |
+| `see_examples` | none | yes |
+| `find_video` | `about` string, up to 300 chars, empty for the newest; `limit` 1 to 5, default 3 | yes |
+| `cmein_info` | `topic`, required: `pricing`, `examples`, `faq`, `about`, `refund`, `careers`, `guides`, `terms`, `privacy` | yes |
+| `contact_us` | `email`, `subject`, `message` required (255, 200, 5000 chars); `name` optional | no, sends a message |
+| `my_credits` | none | yes |
+| `my_generations` | `limit` 1 to 25, default 10 | yes |
+| `find_scene` | `q` place, activity or setting, up to 80 chars; `limit` 1 to 40, default 12 | yes |
+| `request_credits_back` | `reason` required, up to 5000 chars; `generationId` optional, from `my_generations` | no, opens a request |
+
+Ask your assistant to list the tools to see the exact schemas it received.
+
 ## How it works
 
 - **Advice** is BM25 search over CMeIn's own articles, with the title and target keyword weighted.
@@ -98,9 +122,14 @@ A `Dockerfile` is included: a two-stage build that runs as a non-root user with 
 ## Links
 
 - [cmein.com](https://cmein.com): the product
+- [Pricing](https://cmein.com/pricing): the credit packs (`cmein_pricing` reads this page live, so
+  prices are never copied into this repo)
+- [The Wingman](https://cmein.com/wingman): photos, a bio and your messages, worked on with you
 - [cmein.com/mcp](https://cmein.com/mcp): this connector, for people rather than developers
 - [Blog](https://cmein.com/blog): the articles `photo_advice` answers from
 - [Guides](https://cmein.com/guides) and the free [Best Angle](https://cmein.com/best-angle) tool
+- Apps: [App Store](https://apps.apple.com/app/id6777321629),
+  [Google Play](https://play.google.com/store/apps/details?id=com.cmein.ai)
 - [YouTube](https://www.youtube.com/@cmein-ai/shorts), [Instagram](https://www.instagram.com/cmein.app/),
   [Threads](https://www.threads.com/@cmein.app), [Facebook](https://www.facebook.com/people/CMeIn/61590427634614/)
 
